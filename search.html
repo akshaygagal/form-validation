@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <title>GStack</title>
+  <style type="text/css">
+    * {
+      box-sizing: border-box;
+    }
+
+    #myTable {
+      border-collapse: collapse;
+      width: 100%;
+      border: 1px solid #ddd;
+      font-size: 18px;
+    }
+
+    #myTable th, #myTable td {
+      text-align: left;
+      padding: 12px;
+    }
+
+    #myTable tr {
+      border-bottom: 1px solid #ddd;
+    }
+
+    #myTable tr.header, #myTable tr:hover {
+      background-color: #f1f1f1;
+    }
+    .inner-addon { 
+      position: relative;
+      margin: 40px 40px 40px 40px;
+    }
+
+    /* style icon */
+    .inner-addon .glyphicon {
+      position: absolute;
+      padding: 10px;
+      pointer-events: none;
+    }
+
+    /* align icon */
+    .left-addon .glyphicon  { left:  0px;}
+    .right-addon .glyphicon { right: 0px;}
+
+    /* add padding  */
+    .left-addon input  { padding-left:  30px; }
+    .right-addon input { padding-right: 30px; }
+  </style>
+</head>
+<body>
+  <p id="totalQuitity"></p>
+  <p id="totalPrice"></p>
+  <div class="inner-addon left-addon">
+    <i class="glyphicon glyphicon-search"></i>
+    <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search" size="45">
+  </div>
+  <table id="myTable">
+    <tr class="header">
+      <th style="width:50%;">Name</th>
+      <th style="width:40%;">quitity</th>
+      <th style="width:40%">price</th>
+    </tr>
+    <tr>
+      <td>shirt c-grey 9712376462 S18</td>
+      <td>1</td>
+      <td>800</td>
+    </tr>
+    <tr>
+      <td>shirt, c-grey, 9712376462, S-18</td>
+      <td>13</td>
+      <td>13000</td>
+    </tr>
+    <tr>
+      <td>c-grey 9712376462 S18 shirt-pet</td>
+      <td>36</td>
+      <td>40000</td>
+    </tr>
+    <tr>
+      <td>shirt c-blue 97123767000 2XL28</td>
+      <td>15</td>
+      <td>2000</td>
+    </tr>
+    <tr>
+      <td>lower-shirt c-grey 9712376462 S18</td>
+      <td>20</td>
+      <td>20000</td>
+    </tr>
+    <tr>
+      <td>shirtc-grey9712376462S18</td>
+      <td>30</td>
+      <td>15000</td>
+    </tr>
+    <tr>
+      <td>shirt c-red and pink 9712376462 S18</td>
+      <td>1</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <td>pet c-black 9612376462 M28</td>
+      <td>2</td>
+      <td>10</td>
+    </tr>
+  </table>
+
+  <script>
+    function myFunction() {
+      var input, filter, table, tr, td, td2, getTd, i, result, split, sumOfQ, totalQuitity, totalPrice;
+      totalQuitity = 0
+      totalPrice = 0
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      splits = filter.split(/(?:,| )+/)
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        getTd = tr[i].getElementsByTagName("td");
+        td = getTd[0];
+        td2 = getTd[1];
+        td3 = getTd[2];
+        if (td || td2) {
+          result = splits.every(function(item) {
+            return td.innerHTML.toUpperCase().indexOf(item) > -1
+          });
+          if (result || td2.innerHTML.toUpperCase().indexOf(filter) > -1 || td3.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+            totalQuitity += Number(getTd[1].innerHTML)
+            totalPrice += Number(getTd[2].innerHTML) * Number(getTd[1].innerHTML)
+          } else {
+            tr[i].style.display = "none";
+          }
+        }     
+      }
+      document.getElementById('totalQuitity').innerHTML = totalQuitity;
+      document.getElementById('totalPrice').innerHTML = totalPrice;
+    }
+
+  </script>
+
+</body>
+</html>
+

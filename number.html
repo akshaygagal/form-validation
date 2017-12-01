@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style type="text/css">
+    #numberValid,
+    #numberInValid
+    {
+      display: none; 
+    }
+
+    .inner-addon { 
+      position: relative; 
+    }
+
+    /* style icon */
+    .inner-addon .glyphicon {
+      position: absolute;
+      padding: 10px;
+      pointer-events: none;
+    }
+
+    /* align icon */
+    .left-addon .glyphicon  { left:  0px;}
+    .right-addon .glyphicon { right: 0px;}
+
+    /* add padding  */
+    .left-addon input  { padding-left:  30px; }
+    .right-addon input { padding-right: 30px; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="form-group has-feedback">
+    <label class="control-label">Username</label>
+    <input class="form-control" type="text" id="userInput" onkeyup="validUser()" placeholder="user name">
+    <i class="fa fa-check form-control-feedback" id="numberValid"></i>
+    <i class="fa fa-times form-control-feedback" id="numberInValid"></i>
+    <p id='numberText'></p>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function validUser() {
+    input = document.getElementById("userInput");
+    filter = input.value.toLowerCase();
+    var len = filter.length
+    if (len === 10 && !/[^0-9]/.test(filter)) {
+      document.getElementById("numberValid").style.display = 'block';
+      document.getElementById("numberInValid").style.display = 'none';
+      document.getElementById("numberValid").style.color = '#3def10';
+      document.getElementById("userInput").style.borderColor = '#3def10';
+      document.getElementById("userInput").style.color = '#3def10';
+      document.getElementById("numberText").style.display = 'none'
+    }
+    else {
+      document.getElementById("numberValid").style.display = 'none';
+      document.getElementById("numberInValid").style.display = 'block';
+      document.getElementById("numberInValid").style.color = 'red';
+      document.getElementById("userInput").style.borderColor = 'red';
+      document.getElementById("userInput").style.color = 'red';
+      var validText = 'chack your mobile number';
+      document.getElementById("numberText").innerHTML = validText;
+      document.getElementById("numberText").style.display = 'block';
+      document.getElementById("numberText").style.color = 'red';
+    }
+  }
+
+
+</script>
+</body>
+</html>
+
+
