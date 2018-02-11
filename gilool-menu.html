@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <title>GStack</title>
+  <style type="text/css">
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      overflow-x: hidden;
+      height: 2100px;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0px 4px;
+    }
+
+    .column {
+        flex:50%;
+        max-width: 50%;
+        padding: 0px 6px;
+    }
+
+    .column img {
+        margin-top: 20px;    
+    }
+
+    @media (max-width: 800px) {
+        .column {
+            flex: 50%;
+            max-width: 50%;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .column {
+            flex: 100%;
+            max-width: 100%;
+        }
+    }
+
+    #myTable {
+      width: 100%;
+      font-size: 18px;
+    }
+
+    #myTable th, #myTable td {
+      text-align: left;
+      padding: 12px;
+    }
+
+    #myTable tr {
+      border-bottom: 1px solid #ddd;
+    }
+
+    #myTable tr.header, #myTable tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .inner-addon { 
+      position: relative;
+      margin: 40px 40px 40px 40px;
+    }
+
+    /* style icon */
+    .inner-addon .glyphicon {
+      position: absolute;
+      padding: 10px;
+      pointer-events: none;
+    }
+
+    /* align icon */
+    .left-addon .glyphicon  { left:  0px;}
+    .right-addon .glyphicon { right: 0px;}
+
+    /* add padding  */
+    .left-addon input  { padding-left:  30px; }
+    .right-addon input { padding-right: 30px; }
+  </style>
+</head>
+<body>
+  <div class="row"> 
+    <div class="column">
+      <img src="static/images/modern_mobile.jpeg" style="width:100%
+      ;height:400px">
+      <img src="static/images/bluetooth.jpeg" style="width:100%;height:350px">
+      <img src="static/images/head_phone.jpeg" style="width:100%;height:600px">
+    </div>
+    <div class="column">
+      <img src="static/images/ear_phone.jpeg" style="width:100%;height:400px">
+      <img src="static/images/data_cable.jpeg" style="width:100%;height:250px">
+      <img src="static/images/cover.jpeg" style="width:100%;height:345px">
+      <img src="static/images/ring.jpeg" style="width:100%;height:350px">
+    </div> 
+  </div>
+  <p id="totalQuitity"></p>
+  <p id="totalPrice"></p>
+  <div class="inner-addon left-addon">
+    <i class="glyphicon glyphicon-search"></i>
+    <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search" size="45">
+  </div>
+  <table id="myTable">
+    <tr class="header">
+      <th style="width:38%;">Name</th>
+      <th style="width:20%;">quitity</th>
+      <th style="width:20%">price</th>
+      <th style="width:40%">sponser</th>
+    </tr>
+    <tr class="search-item">
+      <td class="item">shirt c-grey 9712376462 S18</td>
+      <td class="item">1</td>
+      <td class="item">800</td>
+      <td class="item">akshay gagal</td>
+    </tr>
+    <tr class="search-item">
+      <td class="item">shirt, c-grey, 9712376462, S-18</td>
+      <td class="item">13</td>
+      <td class="item">13000</td>
+      <td class="item">amit gagal</td>
+    </tr>
+    <tr class="search-item">
+      <td class="item">c-grey 9712376462 S18 shirt-pet</td>
+      <td class="item">36</td>
+      <td class="item">40000</td>
+      <td class="item">anand kapdi</td>
+    </tr>
+    <tr class="search-item">
+      <td class="item">shirt c-blue 97123767000 2XL28</td>
+      <td class="item">15</td>
+      <td class="item">2000</td>
+      <td class="item">hasu gagal</td>
+    </tr>
+    <tr class="search-item">
+      <td class="item">lower-shirt c-grey 9712376462 S18</td>
+      <td class="item">20</td>
+      <td class="item">20000</td>
+      <td class="item">parth gagal</td>
+    </tr>
+    <tr class="search-item">
+      <td class="item">shirtc-grey9712376462S18</td>
+      <td class="item">30</td>
+      <td class="item">15000</td>
+      <td class="item">remesh gagal</td>
+    </tr>
+    <tr class="search-item">
+      <td class="item">shirt c-red and pink 9712376462 S18</td>
+      <td class="item">1</td>
+      <td class="item">100</td>
+      <td class="item">suriya yadav</td>
+    </tr>
+    <tr class="search-item">
+      <td class="item">pet c-black 9612376462 M28</td>
+      <td class="item">2</td>
+      <td class="item">10</td>
+      <td class="item">elon musk</td>
+    </tr>
+  </table>
+
+  <script>
+    function myFunction() {
+      var input = document.getElementById("myInput");
+      var filter = input.value.toUpperCase();
+      var splits = filter.split(/(?:,| )+/);
+      var search = document.getElementById("myTable");
+      var searchItems = search.getElementsByClassName('search-item');
+      var array = [];
+      for (i of searchItems) {
+        items = i.getElementsByClassName('item')
+        for (j of items) {
+          array.push(j.innerHTML)
+        }
+        var some = splits.every((s) => {
+          return check(array, s)
+        })
+        if (some) {
+          i.style.display = ''
+        }
+        else {
+          i.style.display = 'none'
+        }
+        array = [];
+      }
+    }
+
+    function check(array, item) {
+      return array.some((i) => {
+        return i.toUpperCase().indexOf(item) > -1
+      })
+    }
+
+  </script>
+
+</body>
+</html>
